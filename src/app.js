@@ -10,6 +10,12 @@ const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 
 const app = express();
 
+app.get('/', (req, res, next) => {
+   res.send(`
+   <a href="/graphiql">Graphiql</a>
+   `)
+})
+
 var queryType = new GraphQLObjectType({
   name: "Query",
   fields: {
