@@ -61,5 +61,27 @@ const customerQueryFields = {
     }
   }
 };
-
-module.exports = { customerType, customerQueryFields };
+const customerMutationFields = {
+  create: {
+    type: customerType,
+    // `args` describes the arguments that the `user` query accepts
+    args: {
+      id: { type: GraphQLInt },
+      firstName: { type: GraphQLString },
+      lastName: { type: GraphQLString },
+      dateOfBirth: { type: GraphQLString }
+    },
+    resolve: function(parent, args) {
+      return axios
+        .post(`${config.apiUrl}/customers`, { ...args })
+        .then(data => {
+          return data.data;
+        })
+        .catch(e => {
+          console.log(e);
+          return {};
+        });
+    }
+  }
+};
+module.exports = { customerType, customerQueryFields, customerMutationFields };

@@ -1,9 +1,13 @@
-const { customerQueryFields: customerSchema } = require("./customerSchema");
-const productSchema = require("./productSchema");
-const orderSchema = require("./orderSchema");
+const {
+  customerQueryFields,
+  customerMutationFields
+} = require("./customerSchema");
+const productQueryFields = require("./productSchema");
+const orderQueryFields = require("./orderSchema");
 
 module.exports = {
-  customerSchema,
-  productSchema,
-  orderSchema
+  customerQueryFields,
+  productQueryFields,
+  orderQueryFields,
+  customerMutationFields
 };

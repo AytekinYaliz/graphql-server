@@ -1,20 +1,20 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const {
-  customerSchema: customerQueryFields,
-  productSchema: productQueryFields,
-  orderSchema: orderQueryFields
+  customerQueryFields,
+  productQueryFields,
+  orderQueryFields,
+  customerMutationFields
 } = require("./schemas");
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 
-
 const app = express();
 
-app.get('/', (req, res, next) => {
-   res.send(`
+app.get("/", (req, res, next) => {
+  res.send(`
    <a href="/graphiql">Graphiql</a>
-   `)
-})
+   `);
+});
 
 var queryType = new GraphQLObjectType({
   name: "Query",
@@ -25,10 +25,17 @@ var queryType = new GraphQLObjectType({
   }
 });
 
+var mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    ...customerMutationFields
+  }
+});
+
 app.use(
   "/graphiql",
   graphqlHTTP({
-    schema: new GraphQLSchema({ query: queryType }),
+    schema: new GraphQLSchema({ query: queryType, mutation }),
     graphiql: true
   })
 );
