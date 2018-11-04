@@ -7,7 +7,7 @@ const {
 } = require("graphql");
 const axios = require("axios");
 const { customerType, customerQueryFields } = require("./customerSchema");
-const config = require("../config");
+const config = require("../../config");
 
 const productType = new GraphQLObjectType({
   name: "Order_Product",

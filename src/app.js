@@ -5,8 +5,10 @@ const {
   productSchema: productQueryFields,
   orderSchema: orderQueryFields
 } = require("./schemas");
-const app = express();
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
+
+
+const app = express();
 
 var queryType = new GraphQLObjectType({
   name: "Query",

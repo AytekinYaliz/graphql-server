@@ -6,7 +6,7 @@ const {
   GraphQLList
 } = require("graphql");
 const axios = require("axios");
-const config = require("../config");
+const config = require("../../config");
 
 const customerType = new GraphQLObjectType({
   name: "Customer",
@@ -35,7 +35,6 @@ const customerQueryFields = {
       id: { type: GraphQLInt }
     },
     resolve: function(parent, args) {
-      console.log("HI", parent.customerId);
       return axios
         .get(`${config.apiUrl}/customers/${args.id || parent.customerId}`)
         .then(data => {
