@@ -7,8 +7,17 @@ const {
   customerMutationFields
 } = require("./schemas");
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
+const cors = require("cors");
 
 const app = express();
+
+app.use(
+  cors({
+    optionsSuccessStatus: 200,
+    origin: "*"
+    // credentials: true,
+  })
+);
 
 app.get("/", (req, res, next) => {
   res.send(`
