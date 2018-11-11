@@ -1,0 +1,19 @@
+type Address {
+  number: Int!
+  street: String!
+  town: String!
+  postcode: String!
+}
+
+type Customer {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: String!
+  address: [Address]
+}
+
+type Query {
+  customers: [Customer]!
+  customer(id: ID!): Customer!
+}

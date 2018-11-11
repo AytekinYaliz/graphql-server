@@ -1,52 +1,57 @@
-const express = require("express");
-const graphqlHTTP = require("express-graphql");
-const {
-  customerQueryFields,
-  productQueryFields,
-  orderQueryFields,
-  customerMutationFields
-} = require("./schemas");
-const { GraphQLSchema, GraphQLObjectType } = require("graphql");
-const cors = require("cors");
+const { GraphQLServer } = require("graphql-yoga");
+const gqlServerConfig = require("./api");
 
-const app = express();
+module.exports = new GraphQLServer(gqlServerConfig);
 
-app.use(
-  cors({
-    optionsSuccessStatus: 200,
-    origin: "*"
-    // credentials: true,
-  })
-);
+// const express = require("express");
+// const graphqlHTTP = require("express-graphql");
+// const {
+//   customerQueryFields,
+//   productQueryFields,
+//   orderQueryFields,
+//   customerMutationFields
+// } = require("./schemas");
+// const { GraphQLSchema, GraphQLObjectType } = require("graphql");
+// const cors = require("cors");
 
-app.get("/", (req, res, next) => {
-  res.send(`
-   <a href="/graphiql">Graphiql</a>
-   `);
-});
+// const app = express();
 
-var queryType = new GraphQLObjectType({
-  name: "Query",
-  fields: {
-    ...customerQueryFields,
-    ...productQueryFields,
-    ...orderQueryFields
-  }
-});
+// app.use(
+//   cors({
+//     optionsSuccessStatus: 200,
+//     origin: "*"
+//     // credentials: true,
+//   })
+// );
 
-var mutation = new GraphQLObjectType({
-  name: "Mutation",
-  fields: {
-    ...customerMutationFields
-  }
-});
+// app.get("/", (req, res, next) => {
+//   res.send(`
+//    <a href="/graphiql">Graphiql</a>
+//    `);
+// });
 
-app.use(
-  "/graphiql",
-  graphqlHTTP({
-    schema: new GraphQLSchema({ query: queryType, mutation }),
-    graphiql: true
-  })
-);
+// var queryType = new GraphQLObjectType({
+//   name: "Query",
+//   fields: {
+//     ...customerQueryFields,
+//     ...productQueryFields,
+//     ...orderQueryFields
+//   }
+// });
 
-module.exports = app;
+// var mutation = new GraphQLObjectType({
+//   name: "Mutation",
+//   fields: {
+//     ...customerMutationFields
+//   }
+// });
+
+// app.use(
+//   "/graphiql",
+//   graphqlHTTP({
+//     schema: new GraphQLSchema({ query: queryType, mutation }),
+//     graphiql: true
+//   })
+// );
+
+// module.exports = app;

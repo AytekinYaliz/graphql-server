@@ -1,9 +1,12 @@
-const config = require('./config')
-const app = require('./src/app')
+const { port } = require("./config");
+const app = require("./src/app");
 
+const serverOptions = {
+  port,
+  endpoint: "/graphql",
+  playground: "/docs",
+  tracing: true,
+  debug: true
+};
 
-const { port }  = config;
-
-app.listen(port, () => {
-   console.log( `Listening on port ${port}` );
-})
+app.start(serverOptions, ({ port }) => console.log(`Server on port ${port}`));
