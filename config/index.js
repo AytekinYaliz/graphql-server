@@ -1,4 +1,9 @@
+const dotenv = require('dotenv')
+
+
+dotenv.config()
+
 module.exports = {
-  port: 4000,
-  apiUrl: "http://localhost:4001"
-};
+   port: process.env.PORT
+   apiUrl: process.env.API_URL
+}
